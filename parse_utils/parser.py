@@ -13,7 +13,7 @@ class Parser:
     def parse(self):
         """
         Match sql operation type then parse into a tree
-        :return: dictionary
+        :return: query object
         """
         matched = self._tokenizer.lookahead
         if matched:
