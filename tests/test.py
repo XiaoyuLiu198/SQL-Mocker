@@ -5,7 +5,7 @@ from parse_utils.pattern_parser import Query
 from parse_utils.tokenizer import Token
 from parse_utils.parser import Parser
 
-test1 = {"col1": [1, 2, 3, 4, 5, 6], "col2": [2, 5, 3, 2, 4, 6], "col3": [2, 3, 4, 5, 7, 6]}
+test1 = {"col1": [1, 2, 3, 4.5, 5, 6], "col2": [2, 5, 3, 2, 4, 6], "col3": [2, 3, 4, 5, 7, 6]}
 test2 = {"col1": ["val1", "val2", "val3"], "col2": ["val1", "v5", "v6"]}
 
 table_1 = TableData(data=test1, name="dataset_1")
@@ -35,7 +35,7 @@ def test_select_statement_1():
     query = "select col1 from dataset_1 where not col1=2;"
     parsed_query = Parser(query).parse()
     res = Executor(query=parsed_query, db=db).execute()
-    assert res == {'col1': [1,3,4,5,6]}
+    assert res == {'col1': [1,3,4.5,5,6]}
 
 def test_select_statement_2():
     query = "select col1 from dataset_1 where col1=2 and col2=5;"
