@@ -21,7 +21,7 @@ class Selector:
         self.query = query
         self.db = db
 
-    def semantic_checker(self):
+    def checker(self):
         if not self.db.check_table_existence(self.query.table.table):
             raise ValueError("Table is not in the database")
         for col in self.query.columns.columns:
@@ -30,7 +30,7 @@ class Selector:
         return True
 
     def select(self):
-        if self.semantic_checker():
+        if self.checker():
             data = self.db.retrieve_table(self.query.table.table)
             if self.query.predicates:
                 idx = Filter(self.query.predicates, data).filter()
